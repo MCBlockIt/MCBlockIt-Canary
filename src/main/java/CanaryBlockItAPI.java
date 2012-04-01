@@ -1,20 +1,25 @@
-
 import java.io.*;
 import java.util.HashSet;
 
 import it.mcblock.mcblockit.api.MCBIConfig;
 import it.mcblock.mcblockit.api.MCBlockItAPI;
 
-public class CanaryBlockItAPI extends MCBlockItAPI{
+public class CanaryBlockItAPI extends MCBlockItAPI {
 
-    private CanaryConfig config;
-    private File dataFolder;
+    public static boolean isBanned(String name) {
+        return CanaryBlockItAPI.banList.contains(name.toLowerCase());
+    }
+    private final CanaryConfig config;
+
+    private final File dataFolder;
+
+    public static HashSet<String> banList = new HashSet<String>();
 
     public CanaryBlockItAPI(String APIKey, File dataFolder) {
         super(APIKey, dataFolder);
-        this.dataFolder=dataFolder;
-        this.config=new CanaryConfig(new PropertiesFile(dataFolder+"/mcblockit.properties"));
-        File file=new File(dataFolder,"bans.txt");
+        this.dataFolder = dataFolder;
+        this.config = new CanaryConfig(new PropertiesFile(dataFolder + "/mcblockit.properties"));
+        final File file = new File(dataFolder, "bans.txt");
         if (file.exists()) {
             try {
                 final BufferedReader input = new BufferedReader(new FileReader(file));
@@ -23,7 +28,7 @@ public class CanaryBlockItAPI extends MCBlockItAPI{
                     if (line.length() < 1) {
                         continue;
                     }
-                    banList.add(line.toLowerCase());
+                    CanaryBlockItAPI.banList.add(line.toLowerCase());
                 }
                 input.close();
             } catch (final IOException e) {
@@ -38,6 +43,20 @@ public class CanaryBlockItAPI extends MCBlockItAPI{
         return this.config;
     }
 
+    private void updateBanList() {
+        try {
+            final BufferedWriter outputUnbans = new BufferedWriter(new FileWriter(new File(this.dataFolder, "bans.txt")));
+
+            for (final String name : CanaryBlockItAPI.banList) {
+                outputUnbans.write(name + "\n");
+            }
+            outputUnbans.close();
+        } catch (final IOException e) {
+            System.out.println("Failed to write bans");
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void banName(String name) {
         CanaryBlockItAPI.banList.add(name.toLowerCase());
@@ -49,25 +68,5 @@ public class CanaryBlockItAPI extends MCBlockItAPI{
         CanaryBlockItAPI.banList.remove(name.toLowerCase());
         this.updateBanList();
     }
-
-    private void updateBanList(){
-        try {
-            final BufferedWriter outputUnbans = new BufferedWriter(new FileWriter(new File(this.dataFolder,"bans.txt")));
-
-            for(String name:banList){
-                outputUnbans.write(name+"\n");
-            }
-            outputUnbans.close();
-        } catch (final IOException e) {
-            System.out.println("Failed to write bans");
-            e.printStackTrace();
-        }
-    }
-
-    public static boolean isBanned(String name) {
-        return banList.contains(name.toLowerCase());
-    }
-
-    public static HashSet<String> banList=new HashSet<String>();
 
 }

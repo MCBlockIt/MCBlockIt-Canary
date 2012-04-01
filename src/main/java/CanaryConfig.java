@@ -1,47 +1,50 @@
 
-
 import java.util.Arrays;
 import java.util.List;
 
 import it.mcblock.mcblockit.api.MCBIConfig;
 
+public class CanaryConfig implements MCBIConfig {
 
-public class CanaryConfig implements MCBIConfig{
+    private final PropertiesFile properties;
 
-    private PropertiesFile properties;
-
-    public CanaryConfig(PropertiesFile properties){
-        this.properties=properties;
+    public CanaryConfig(PropertiesFile properties) {
+        this.properties = properties;
     }
-    
+
     @Override
     public int getBanRestriction() {
-        return properties.getInt("banRestrictionValue", 5);
+        return this.properties.getInt("banRestrictionValue", 5);
+    }
+
+    @Override
+    public int getCacheTimeout() {
+        return this.properties.getInt("cacheTimeout", 5);
     }
 
     @Override
     public List<String> getFlagRestriction() {
-        return Arrays.asList(properties.getString("flagRestrictionValue", "").split(","));
+        return Arrays.asList(this.properties.getString("flagRestrictionValue", "").split(","));
     }
 
     @Override
     public double getReputationRestriction() {
-        return properties.getDouble("reputationRestrictionValue",0.0D);
+        return this.properties.getDouble("reputationRestrictionValue", 0.0D);
     }
 
     @Override
     public boolean isBanRestrictionEnabled() {
-        return properties.getBoolean("banRestrictionEnable", false);
+        return this.properties.getBoolean("banRestrictionEnable", false);
     }
 
     @Override
     public boolean isFlagRestrictionEnabled() {
-        return properties.getBoolean("FlagRestrictionEnable", false);
+        return this.properties.getBoolean("FlagRestrictionEnable", false);
     }
 
     @Override
     public boolean isReputationRestrictionEnabled() {
-        return properties.getBoolean("reputationRestrictionEnable", true);
+        return this.properties.getBoolean("reputationRestrictionEnable", true);
     }
 
 }

@@ -1,26 +1,26 @@
 import it.mcblock.mcblockit.api.MCBIPlayer;
 
-public class CanaryPlayer implements MCBIPlayer{
+public class CanaryPlayer implements MCBIPlayer {
 
     Player player;
-    
-    public CanaryPlayer(Player player){
-        this.player=player;
+
+    public CanaryPlayer(Player player) {
+        this.player = player;
     }
-    
+
     @Override
     public String getIP() {
-        return player.getIP();
+        return this.player.getIP();
     }
 
     @Override
     public String getName() {
-        return player.getName();
+        return this.player.getName();
     }
 
     @Override
     public void kick(String reason) {
-        player.kick(reason);
+        this.player.kick(reason);
     }
 
 }
