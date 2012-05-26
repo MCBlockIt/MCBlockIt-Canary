@@ -34,8 +34,6 @@
             <groupId>net.canarymod</groupId>
             <artifactId>canarymod</artifactId>
             <version>4.10.10</version>
-            <type>jar</type>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>it.mcblock.api</groupId>
