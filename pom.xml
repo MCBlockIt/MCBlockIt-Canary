@@ -32,7 +32,7 @@
     <dependencies>
         <dependency>
             <groupId>net.canarymod</groupId>
-            <artifactId>canarymod</artifactId>
+            <artifactId>CanaryMod</artifactId>
             <version>4.10.10</version>
         </dependency>
         <dependency>
