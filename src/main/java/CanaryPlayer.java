@@ -1,6 +1,6 @@
 import it.mcblock.mcblockit.api.MCBIPlayer;
 
-public class CanaryPlayer implements MCBIPlayer {
+public class CanaryPlayer extends MCBIPlayer {
 
     Player player;
 
@@ -21,6 +21,12 @@ public class CanaryPlayer implements MCBIPlayer {
     @Override
     public void kick(String reason) {
         this.player.kick(reason);
+    }
+
+    @Override
+    public void messageIfAdmin(String message) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

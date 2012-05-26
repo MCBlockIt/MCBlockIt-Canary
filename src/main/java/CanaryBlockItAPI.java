@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.HashSet;
+import java.util.logging.Level;
 
 import it.mcblock.mcblockit.api.MCBIConfig;
 import it.mcblock.mcblockit.api.MCBlockItAPI;
@@ -57,16 +58,46 @@ public class CanaryBlockItAPI extends MCBlockItAPI {
         }
     }
 
-    @Override
+    //@Override
     protected void banName(String name) {
         CanaryBlockItAPI.banList.add(name.toLowerCase());
         this.updateBanList();
     }
 
-    @Override
+    //@Override
     protected void unbanName(String name) {
         CanaryBlockItAPI.banList.remove(name.toLowerCase());
         this.updateBanList();
+    }
+
+    @Override
+    public String getVersion() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    protected void log(Level level, String message) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void log(Level level, String message, Throwable thrown) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void log(String message) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void shutdown() {
+        // TODO Auto-generated method stub
+        
     }
 
 }

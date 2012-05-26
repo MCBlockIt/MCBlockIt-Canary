@@ -45,7 +45,7 @@ public class Listener extends PluginListener {
             } else {
                 name = player.getName();
             }
-            MCBlockItAPI.ban(split[1], name, reason);
+            MCBlockItAPI.ban(split[1], name, null, reason);
             return true;
         }
         if (split[0].equalsIgnoreCase("unban") && ((player == null) || player.canUseCommand("unban"))) {
