@@ -25,7 +25,7 @@
         </repository>
         <repository>
             <id>mcblockit-repo</id>
-            <url>http://repo.doridian.de/content/repositories/bamboo/</url>
+            <url>http://repo.doridian.de/content/repositories/public/</url>
         </repository>
     </repositories>
 
